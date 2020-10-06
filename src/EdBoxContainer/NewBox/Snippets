@@ -1,0 +1,42 @@
+Sniped from NewBox 8:36 pm 10/16:
+
+   render(){
+        return(
+            <form onSubmit={this.handleSubmit}>
+                <div className="newGrade">
+                <label htmlFor="Grade">Grade</label>
+                <div className="newGradeInput">
+                <input type="text" name="grade" onChange={this.handleChange}/>
+                </div>
+              </div>
+
+              <div className="newReadingLevel">
+                <label htmlFor="Reading_level">Reading Level</label>
+                <div className="readingLevelInput">
+                <input type="text" name="reading_level" onChange={this.handleChange}/>
+                </div>
+              </div>
+
+              <div className="newDescription">
+                <label htmlFor="Description">Description</label>
+                <div className="newDescriptionInput">
+                <input type="text" name="description" onChange={this.handleChange}/>
+                </div>
+              </div>
+              <div className="newContents">
+                <label htmlFor="Contents">Contents</label>
+                <div className="newContentsInput">
+                <input type="text" name="contents" onChange={this.handleChange}/>
+                </div>
+              </div>
+              <div className="submitSuggestion">
+                <input type="submit" value="Create"></input>
+
+              </div>
+        </form>
+            
+        )
+    }
+}
+
+export default NewBox; 

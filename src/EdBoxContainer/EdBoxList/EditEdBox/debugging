@@ -1,0 +1,3 @@
+const validUpdate = await this.state.updateBox(this.props.box.id, this.state)
+const validUpdate = await this.props.box.updateBox(this.props.box.id, this.state)
+

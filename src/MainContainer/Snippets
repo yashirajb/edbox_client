@@ -1,0 +1,361 @@
+snipped out from EdBoxCard:
+
+<Container>
+<Row>
+{/* <Card style={{ width: '50rem' }}> */}
+<Card>
+  <Card.Img top width="100%" src="https://i.imgur.com/ijj5oWF.jpg" />
+  <Card.Body>
+    <Card.Title key= {box._id}></Card.Title>
+    <Card.Text> 
+    {/* <li key = {box._id}> */}
+            <h2>{box.grade}</h2>
+           <h2>{box.reading_level}</h2>
+            <h2>{box.description}</h2>
+            <h2>{box.contents}</h2>
+            
+    </Card.Text>
+    {/* <Button variant="primary">Go somewhere</Button> */}
+    <div className="editBox">
+            <EditEdBox box={box} updateBox={props.updateBox}/>
+            </div>
+            <div className="deleteBox">
+                <button onClick={()=>{props.deleteBox(box._id)}}>Delete {box.grade} {box.reading_level} Box</button>
+            </div>
+  </Card.Body>
+</Card>
+</Row>
+</Container>
+
+
+Taken from App.js in return: 
+
+           <div className="sidebarContainer">
+            <Sidebar />
+            {/* <Sidebar /> */}
+            </div>
+            <h1>Welcome to Edboxes, this is the App component</h1>
+            <div className="boxes">
+            <Boxes />
+            <HeaderContainer />
+            </div>
+            <div>
+          </div>
+        );
+    }
+
+
+    From EdBoxList: 
+
+    // <div className="edBoxListBoxes">
+// <Container>
+// <Row>
+// <Card style={{ width: '50rem' }}>
+//   <Card.Img variant="top" src="https://i.imgur.com/ijj5oWF.jpg" />
+//   <Card.Body>
+//     <Card.Title>EdBox Profile</Card.Title>
+//     <Card.Text>
+//     <li key = {box._id}>
+//             <h2>{box.grade}</h2>
+//             <h2>{box.reading_level}</h2>
+//             <h2>{box.description}</h2>
+//             <h2>{box.contents}</h2>
+//             <div className="editBox">
+//             <EditEdBox box={box} updateBox={props.updateBox}/>
+//             </div>
+//             <div className="deleteBox">
+//                 <button onClick={()=>{props.deleteBox(box._id)}}>Delete {box.grade}{box.reading_level} Box</button>
+//             </div>
+//     </li>
+//     </Card.Text>
+//     {/* <Button variant="primary">Go somewhere</Button> */}
+//   </Card.Body>
+// </Card>
+// </Row>
+// </Container>
+// </div>
+
+// <div className="">
+// <li key = {box._id}>
+// <h2>{box.grade}</h2>
+// <h2>{box.reading_level}</h2>
+// <h2>{box.description}</h2>
+// <h2>{box.contents}</h2>
+// <div className="editBox">
+// <EditEdBox box={box} updateBox={props.updateBox}/>
+// </div>
+// <div className="deleteBox">
+//     <button onClick={()=>{props.deleteBox(box._id)}}>Delete {box.reading_level} Box</button>
+// </div>
+// </div>
+// </li>
+
+    
+ 
+// {/* </div>
+        
+// </li>  */}
+
+
+From Maincontainer:
+
+import React, {Component} from 'react';
+import {Container, Row, Col} from 'reactstrap';
+import {Card, CardImg, CardText, CardBody,CardTitle, CardSubtitle, Button} from 'reactstrap';
+import EdBoxCard from './EdBoxCard/EdBoxCard';
+
+// class MainContainer extends Component {
+//     constructor(){
+//         super();
+//         this.state = {
+//             grade:"",
+//             reading_level: "",
+//             description: "",
+//             contents: ""
+//         }
+//     }
+function MainContainer(props){
+    const boxes = props.boxes.map(function(box){
+//         return(
+//             <div>
+//             <li key = {box._id}>
+//                 <h2>{box.grade}</h2>
+//                 <h2>{box.reading_level}</h2>
+//                 <h2>{box.description}</h2>
+//                 <h2>{box.contents}</h2>
+//                 <div className="editBox">
+//                 <EditEdBox box={box} updateBox={props.updateBox}/>
+//                 </div>
+//                 <div className="deleteBox">
+//                     <button onClick={()=>{props.deleteBox(box._id)}}>Delete {box.reading_level} Box</button>
+//                 </div>
+//             </li>
+//             </div>
+//         )
+// })
+           return(
+            <Col sm="4">
+            <EdBoxCard box={box} />
+        </Col>
+           )
+       })
+        return(
+            <Container fluid>
+                <Row>
+               {boxes}
+                </Row>
+            </Container>
+        )
+    }
+
+    
+
+export default MainContainer; 
+
+
+
+From EdBoxCard: 
+
+import React, {Component} from 'react'; 
+// import EdBoxCard from './EdBoxCard/EdBoxCard'
+// import Card from 'react-bootstrap/Card'
+import { Container, Row, Col } from 'reactstrap';
+import {Card, CardImg, CardText, CardBody,CardTitle, CardSubtitle, Button} from 'reactstrap';
+
+class EdBoxCard extends Component {
+    constructor(props){
+        super(props);
+
+    }
+
+    render(){
+        return(
+    <div>
+      <Card>
+        <CardImg top width="100%" src="https://i.imgur.com/ijj5oWF.jpg" alt="Books" />
+        <CardBody>
+          <CardTitle>{this.props.box.grade}</CardTitle>
+          <CardSubtitle>{this.props.box.reading_level}</CardSubtitle>
+          <CardText>{this.props.box.description}</CardText>
+          <CardText>{this.props.box.contents}</CardText>
+          <Button>Button</Button>
+        </CardBody>
+      </Card>
+    </div>         
+        )
+    }
+}
+
+export default EdBoxCard; 
+
+
+From EdBoxCard before change as of 5:13 pm 10/16: 
+
+import React, {Component} from 'react'; 
+// import EdBoxCard from './EdBoxCard/EdBoxCard'
+// import Card from 'react-bootstrap/Card'
+// import { Container, Row, Col } from 'reactstrap';
+import {Card, CardImg, CardText, CardBody,CardTitle, CardSubtitle, Button} from 'reactstrap';
+
+
+class EdBoxCard extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        // modal: false,
+        grade: props.box.grade,
+        reading_level: props.box.reading_level,
+        description: props.box.description,
+        contents: props.box.contents
+       
+      };
+  
+    //   this.toggle = this.toggle.bind(this);
+    // }
+  
+    // toggle() {
+    //   this.setState(prevState => ({
+    //     modal: !prevState.modal
+    //   }));
+    // }
+  
+    // handleChange = (e) => {
+    //     this.setState({
+    //         [e.currentTarget.name] : e.currentTarget.value
+    //     })
+    // }
+  
+    // handleSubmit = async (e) => {
+    //       e.preventDefault();
+    //       console.log("Ready to Update")
+    //       //newerror says this.props.updateChocolate is not a function 
+    //       const validUpdate = await this.props.updateChocolat(this.props.chocolate._id, this.state)
+    //       //make sure the above works before you do this.toggle
+    //       if(validUpdate){
+    //         this.toggle();
+    //       }
+    }
+  
+    render() {
+      return (
+        <div>
+        <Card>
+        <CardImg top width="100%" src="https://i.imgur.com/ijj5oWF.jpg" alt="Books" />
+        <CardBody>
+        <CardTitle>{this.props.box.grade}</CardTitle>
+        <CardSubtitle>{this.props.box.reading_level}</CardSubtitle>
+        <CardText>{this.props.box.description}</CardText>
+        <CardText>{this.props.box.contents}</CardText>
+        </CardBody>
+      </Card>
+    </div>     
+    //       <Button color="success" onClick={this.toggle}>Edit Description: {this.props.chocolate.description}</Button>
+    //       <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+    //         <ModalHeader toggle={this.toggle}>Update Chocolate {this.props.chocolate.title}</ModalHeader>
+    //         <ModalBody>
+    //             <form onSubmit={this.handleSubmit}>
+    //                 Title: <input type="text" name="title" onChange={this.handleChange} value={this.state.title} /> <br></br>
+    //                 Description: <input type="text" name="description" onChange={this.handleChange} value={this.state.description} />
+    //             </form>
+    //         </ModalBody>
+    //         <ModalFooter>
+    //           <Button color="primary" onClick={this.handleSubmit}>Edit Chocolate</Button>
+    //           <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+    //         </ModalFooter>
+    //       </Modal>
+    //     </div>
+      );
+    }
+  }
+  
+  export default EdBoxCard;
+
+  MainContainer before change as of 5:16pm 10/16:
+
+  import React from 'react';
+import EdBoxCard from './EdBoxCard/EdBoxCard';
+import {Container, Row, Col} from 'reactstrap';
+// import {Card, CardImg, CardText, CardBody,CardTitle, CardSubtitle, Button} from 'reactstrap';
+
+
+function MainContainer(props){
+//  //uses map function to create an array of returned items
+    const boxes = props.boxes.map(function(box){
+        return(
+           
+            <Col sm="4">
+            <EdBoxCard box={box}/>
+            </Col>
+           
+           
+            // {/* <li key={box._id}>
+            //     <h2>{box.grade}</h2> 
+            //     <h3>{box.reading_level}</h3>
+            //     <h5>{box.description}</h5>
+            //     <h6>{box.contents}</h6> 
+        
+            //     {/* if you just put box.user it will return a big object and will throw an error, you have to break it down further, to user.username */}
+            //     {/* <h6>Uploaded By: {box.user}</h6> */}
+            //     {/* <br></br> */}
+            //     {/* <div className="editbox">
+            //  <EditChocolatModal box={box} updateChocolat={props.updateChocolat}/>
+            //     </div>
+            //  <br></br>
+            //  <div className="deletebox">
+            //     <button onClick={()=>{props.deleteChocolat(box._id)
+            //     }}>Delete box</button>
+            //     </div> */}
+                
+            //       {/* <br></br> */}
+
+
+        )
+    })
+    return(
+        <Container fluid>
+            <Row>  
+            {boxes}
+            </Row>
+        </Container>
+    )
+}
+
+export default MainContainer;
+
+
+Taken from Header.jsx on 10/17 at 1:23 pm:
+
+  <Jumbotron fluid>
+        <Container fluid>
+          <h1 className="header"></h1>
+          <p className="headerBottom"></p>
+        </Container>
+      </Jumbotron>
+
+
+      Taken from Header.jsx at 1:30 pm 10/17/19:
+
+      const Header = (props) => {
+  return (
+    <div>
+     <Jumbotron>
+        {/* <h1 className="display-3">Hello, world!</h1>
+        <p className="lead">This is a simple hero unit, a simple Jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr className="my-2" />
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p> */}
+        <p className="lead">
+          <Button color="secondary">Register</Button>
+          <br></br>
+          <br></br>
+          <p className="lead2">
+          <Button color="secondary">Login</Button>
+        </p>
+        </p>
+      </Jumbotron>
+    </div>
+  );
+};
+
+
+Added 10/18
+  <EditEdBox boxes={this.state.boxes} deleteBox={this.deleteBox} updateBox={this.updateBox} />
